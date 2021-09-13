@@ -1,0 +1,76 @@
+  
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<title>Employee Records</title>  
+ {% load static %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+<style>
+.col-md-3
+{
+	display: flex;
+	float: right;
+}
+.edit
+{
+	color: #7f1cec;
+}
+.trash
+{
+	color: red;
+}
+thead
+{
+	color: white;
+	text-align: center;
+}
+tbody
+{
+	text-align: center;
+}
+</style>
+</head>  
+<body>  
+<div class="container">
+<br>
+<div class="col-md-3 navbar-2">
+<form action="/show" method="GET">
+<input id="q" name="q" value="{{ request.GET.q }}" 
+class="form-control mr-sm-3" type="text" placeholder="Search ID..." aria-label="Search">
+<button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+</form>&nbsp;
+</div>
+
+<a href="/emp" class="btn btn-primary">Add New&nbsp;<i class="fas fa-user-plus"></i></a> 
+<br><br>
+<table class="table table-striped table-bordered table-sm">  
+    <thead class="thead bg-success">  
+    <tr>  
+        <th>ID</th>  
+        <th>NAME</th>  
+        <th>EMAIL</th>  
+        <th>CONTACT</th>  
+        <th>ACTION</th>  
+    </tr>  
+    </thead>  
+    <tbody>  
+{% for employee in employees %}  
+    <tr>  
+        <td>{{ employee.eid }}</td>  
+        <td>{{ employee.ename }}</td>  
+        <td>{{ employee.eemail }}</td>  
+        <td>{{ employee.econtact }}</td>  
+        <td>  
+            <a href="/edit/{{ employee.id }}" class="edit">
+			<i class="fas fa-user-edit"></i></a>&nbsp;|&nbsp;
+            <a href="/delete/{{ employee.id }}" class="trash"><i class="fas fa-trash-alt"></i></a>  
+        </td>  
+    </tr>  
+{% endfor %}  
+    </tbody>  
+</table>  
+</div>   
+</body>  
+</html>  
